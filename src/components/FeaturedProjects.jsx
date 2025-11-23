@@ -1,100 +1,161 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
+import { motion, useScroll, useTransform, useSpring, useVelocity } from 'framer-motion'; // <--- Motion imports
 import Reveal from './Reveal';
 import { PROJECTS } from '../constants';
 
 const FeaturedProjects = ({ isDark }) => {
+  const [activeProject, setActiveProject] = useState(PROJECTS[0]);
+  const mousePos = useRef({ x: 0, y: 0 });
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const sectionRef = useRef(null);
+
+  // --- VELOCITY LOGIC ---
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
+  
+  // Map scroll speed to skew angle (0 speed = 0 skew, fast speed = max 5 deg skew)
+  const skewX = useTransform(smoothVelocity, [-1000, 0, 1000], [-5, 0, 5]);
+  // ----------------------
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      mousePos.current = { x: e.clientX, y: e.clientY };
+      if (window.innerWidth > 768) {
+         const xPct = (e.clientX / window.innerWidth) - 0.5;
+         const yPct = (e.clientY / window.innerHeight) - 0.5;
+         setTilt({ x: yPct * 5, y: xPct * -5 });
+      }
+    };
+
+    const handleScroll = () => {
+      const elementUnderCursor = document.elementFromPoint(mousePos.current.x, mousePos.current.y);
+      if (elementUnderCursor) {
+        const projectRow = elementUnderCursor.closest('[data-project-id]');
+        if (projectRow) {
+          const id = projectRow.getAttribute('data-project-id');
+          const newActive = PROJECTS.find(p => p.id === id);
+          if (newActive && newActive.id !== activeProject.id) {
+            setActiveProject(newActive);
+          }
+        }
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [activeProject]);
+
   return (
-    <section className={`py-32 px-6 md:px-20 border-b ${isDark ? 'border-white/10' : 'border-black/10'}`}>
+    <section ref={sectionRef} className={`py-32 px-6 md:px-20 border-b ${isDark ? 'border-white/10' : 'border-black/10'}`}>
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-end mb-20">
-           <h2 className={`text-5xl md:text-7xl font-bold ${isDark ? 'text-white' : 'text-black'}`}>Selected Work</h2>
-           <span className="hidden md:block font-mono text-sm opacity-50 interactive">SCROLL DOWN</span>
-        </div>
-
-        <div className="grid grid-cols-1 gap-16 md:gap-24">
-          {PROJECTS.map((project, idx) => (
-        <Reveal key={idx} delay={idx * 0.2}>
-            <Link to={`/projects/${project.id}`} key={idx} className="group w-full interactive">
-              
-              {/* --- DESKTOP LAYOUT (Image + Hover Overlay) --- */}
-              <div className="hidden md:block relative overflow-hidden rounded-3xl aspect-[21/9] cursor-pointer bg-zinc-900">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  loading="lazy"    // <--- Add this
-                  decoding="async"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-hover:brightness-[0.3]" 
-                />
-                
-                {/* Overlay Content - Reveal on Hover */}
-                <div className="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 p-8 text-center">
-                    <span className="font-mono text-xs md:text-sm text-cyan-400 uppercase tracking-widest mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
-                        {project.category}
-                    </span>
-                    <h3 className="text-4xl md:text-6xl font-bold text-white mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">
-                        {project.title}
-                    </h3>
-                    <p className="text-lg text-zinc-300 max-w-xl mb-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-150">
-                        {project.desc}
-                    </p>
-                    
-                    <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-200">
-                        <span className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full font-bold hover:bg-cyan-400 transition-colors">
-                            View Case Study <ArrowUpRight size={20} />
-                        </span>
-                    </div>
-                </div>
-              </div>
-
-              {/* --- MOBILE LAYOUT (Image Top, Details Bottom) --- */}
-              <div className="md:hidden">
-                 <div className="relative overflow-hidden rounded-3xl aspect-[16/9] mb-6 bg-zinc-900">
-                    <img 
-                      src={project.image} 
-                      alt={project.title}
-                      loading="lazy"    // <--- Add this
-                      decoding="async"
-                      className="absolute inset-0 w-full h-full object-cover" 
-                    />
-                 </div>
-                 <div className="space-y-3">
-                    <div className="flex justify-between items-start">
-                        <div>
-                        <span className={`font-mono text-xs uppercase tracking-widest block mb-1 
-    ${isDark ? 'text-cyan-400' : 'text-cyan-700'} 
-`}>
-                                {project.category}
-                            </span>
-                            <h3 className={`text-3xl font-bold ${isDark ? 'text-white' : 'text-black'}`}>
-                                {project.title}
-                            </h3>
-                        </div>
-                        <div className={`p-3 rounded-full border ...`} aria-label="View Project Details">
-                           <ArrowUpRight size={20} />
-                        </div>
-                    </div>
-                    
-                    <p className={`text-base leading-relaxed ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>
-                        {project.desc}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 pt-2">
-                        {project.tech.map((t, i) => (
-                           <span key={i} className={`text-xs font-mono px-3 py-1 rounded-full border
-                              ${isDark ? 'text-zinc-400 border-zinc-800' : 'text-zinc-600 border-zinc-300'}
-                           `}>
-                              {t}
-                           </span>
-                        ))}
-                    </div>
-                 </div>
-              </div>
-
-            </Link>
+        <Reveal>
+            <h2 className={`text-5xl md:text-8xl font-black mb-20 tracking-tighter ${isDark ? 'text-white' : 'text-black'}`}>
+              SELECTED <span className="text-cyan-500">WORK</span>
+            </h2>
         </Reveal>
-          ))}
+
+        <div className="flex flex-col md:flex-row gap-12 md:gap-24 relative">
+            
+            {/* --- LIST SECTION (Left) --- */}
+            <div className="w-full md:w-1/2 flex flex-col z-10 py-[10vh]"> 
+                {PROJECTS.map((project, idx) => (
+                    <div 
+                        key={idx}
+                        data-project-id={project.id}
+                        onMouseEnter={() => setActiveProject(project)}
+                        className={`group border-b transition-all duration-500 py-16 flex flex-col justify-center interactive cursor-pointer
+                            ${isDark ? 'border-white/10' : 'border-black/10'}
+                        `}
+                    >
+                        <Reveal delay={idx * 0.1}>
+                            <Link to={`/projects/${project.id}`} className="block overflow-hidden">
+                                <div className="flex items-center gap-4 mb-4">
+                                    <span className={`font-mono text-xs uppercase tracking-widest transition-colors duration-500
+                                        ${activeProject.id === project.id ? 'text-cyan-500' : (isDark ? 'text-zinc-600' : 'text-zinc-400')}
+                                    `}>
+                                        0{idx + 1} / {project.category}
+                                    </span>
+                                </div>
+                                
+                                <div className="flex justify-between items-center">
+                                    {/* APPLY SKEW TO TITLE */}
+                                    <motion.h3 
+                                        style={{ skewX }} // <--- The Magic Line
+                                        className={`text-4xl md:text-6xl font-black transition-all duration-500 origin-left
+                                            ${isDark 
+                                                ? (activeProject.id === project.id ? 'text-white translate-x-4' : 'text-zinc-800 hover:text-zinc-600') 
+                                                : (activeProject.id === project.id ? 'text-black translate-x-4' : 'text-zinc-200 hover:text-zinc-300')
+                                            }
+                                        `}
+                                    >
+                                        {project.title}
+                                    </motion.h3>
+                                    
+                                    <ArrowUpRight 
+                                        className={`transition-all duration-500 opacity-0 -translate-x-4
+                                            ${activeProject.id === project.id ? 'opacity-100 translate-x-0' : ''}
+                                            ${isDark ? 'text-cyan-500' : 'text-cyan-600'}
+                                        `}
+                                        size={32}
+                                    />
+                                </div>
+                            </Link>
+                        </Reveal>
+                    </div>
+                ))}
+            </div>
+
+            {/* --- PREVIEW IMAGE SECTION (Right - Sticky) --- */}
+            <div className="hidden md:block w-1/2 h-[60vh] sticky top-32 perspective-1000">
+                 <div 
+                    className="w-full h-full relative overflow-hidden rounded-3xl bg-zinc-900 border border-white/5 shadow-2xl transition-transform duration-200 ease-out"
+                    style={{ 
+                        transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`
+                    }}
+                 >
+                    {PROJECTS.map((project) => (
+                        <div
+                            key={project.id}
+                            className={`absolute inset-0 w-full h-full transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]
+                                ${activeProject.id === project.id 
+                                    ? 'opacity-100 scale-100 translate-y-0 rotate-0 blur-0 z-10'  
+                                    : 'opacity-0 scale-90 translate-y-12 rotate-2 blur-lg z-0'   
+                                }
+                            `}
+                        >
+                            <img 
+                                src={project.image} 
+                                alt={project.title}
+                                loading="lazy"
+                                decoding="async"
+                                className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-60" />
+                            <div className="absolute bottom-0 left-0 p-8 w-full">
+                                <div className="flex flex-wrap gap-2 translate-y-4 opacity-0 transition-all duration-500 delay-100"
+                                     style={{ 
+                                         opacity: activeProject.id === project.id ? 1 : 0, 
+                                         transform: activeProject.id === project.id ? 'translateY(0)' : 'translateY(20px)' 
+                                     }}
+                                >
+                                    {project.tech.map((t, i) => (
+                                        <span key={i} className="px-3 py-1 text-xs font-mono font-bold text-white/90 border border-white/20 rounded-full bg-black/30 backdrop-blur-md">
+                                            {t}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                 </div>
+            </div>
         </div>
       </div>
     </section>

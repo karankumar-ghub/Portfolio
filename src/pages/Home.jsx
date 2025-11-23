@@ -7,7 +7,10 @@ import FeaturedProjects from '../components/FeaturedProjects';
 import Footer from '../components/Footer';
 import Reveal from '../components/Reveal';
 import { SERVICES } from '../constants';
-import { Helmet } from 'react-helmet-async'; // <--- Importing data
+import { Helmet } from 'react-helmet-async';
+import Testimonials from '../components/Testimonials'; 
+import TimeStatus from '../components/TimeStatus';
+
 
 const ServicesSection = ({ isDark }) => {
   const navigate = useNavigate();
@@ -70,15 +73,9 @@ const Home = ({ isDark }) => {
 
         <div className="max-w-5xl z-10">
            <Reveal>
-             <div className={`inline-flex items-center gap-3 px-4 py-2 rounded-full border mb-8
-                ${isDark ? 'border-white/20 bg-white/5 text-cyan-400' : 'border-black/10 bg-black/5 text-cyan-700'}
-             `}>
-               <span className="relative flex h-3 w-3">
-                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                 <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
-               </span>
-               <span className="text-sm font-mono font-bold tracking-wider">AVAILABLE FOR HIRE</span>
-             </div>
+           <div className="mb-8">
+        <TimeStatus isDark={isDark} />
+     </div>
            </Reveal>
 
           <Reveal delay={0.1}>
@@ -133,6 +130,7 @@ const Home = ({ isDark }) => {
       <Marquee isDark={isDark} items={["Frontend", "React", "Design", "GSAP", "UI/UX", "Creative"]} />
       <FeaturedProjects isDark={isDark} />
       <ServicesSection isDark={isDark} />
+      <Testimonials isDark={isDark} />
       <Footer isDark={isDark} />
     </PageTransition>
   );

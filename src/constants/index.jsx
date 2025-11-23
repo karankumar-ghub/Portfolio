@@ -87,3 +87,24 @@ export const SOCIAL_LINKS = [
     { name: 'Instagram', href: 'https://www.instagram.com/karan.creats/' },
     { name: 'Telegram', href: 'https://t.me/KaranDRajput' }
   ];
+
+  export const TESTIMONIALS = [
+    {
+      name: "Sarah Jenkins",
+      role: "CEO at TechFlow",
+      text: "Karan transformed our outdated site into a modern masterpiece. His attention to detail and animation skills are unmatched.",
+      image: "https://randomuser.me/api/portraits/women/44.jpg"
+    },
+    {
+      name: "Michael Chen",
+      role: "Product Lead at StartUp",
+      text: "Working with Karan was seamless. He understood our vision immediately and delivered code that was clean, fast, and scalable.",
+      image: "https://randomuser.me/api/portraits/men/32.jpg"
+    },
+    {
+      name: "Jessica Lee",
+      role: "Marketing Director",
+      text: "The new portfolio he built for us increased our conversion rates by 40%. Highly professional and incredibly talented.",
+      image: "https://randomuser.me/api/portraits/women/68.jpg"
+    },
+  ];

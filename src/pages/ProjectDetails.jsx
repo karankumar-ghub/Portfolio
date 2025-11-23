@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Github, ExternalLink } from 'lucide-react';
+import { motion, useScroll, useSpring } from 'framer-motion'
 import { Helmet } from 'react-helmet-async';
 import PageTransition from '../components/PageTransition';
 import Footer from '../components/Footer';
@@ -14,6 +15,13 @@ const ProjectDetails = ({ isDark }) => {
   // Find the specific project data
   const project = PROJECTS.find((p) => p.id === id);
 
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
   // If project doesn't exist (e.g. wrong URL), go back to projects page
   useEffect(() => {
     if (!project) navigate('/projects');
@@ -27,7 +35,10 @@ const ProjectDetails = ({ isDark }) => {
         <title>{project.title} | Case Study</title>
         <meta name="description" content={project.desc} />
       </Helmet>
-
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1.5 origin-left z-50 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 shadow-[0_0_15px_rgba(34,211,238,0.8)]"
+        style={{ scaleX }}
+      />
       <section className="min-h-screen pt-32 px-6 md:px-20 max-w-7xl mx-auto">
         {/* Back Button */}
         <button 
