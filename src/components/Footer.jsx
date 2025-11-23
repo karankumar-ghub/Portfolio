@@ -13,7 +13,7 @@ const Footer = ({ isDark }) => (
           </Reveal>
           <Reveal delay={0.1}>
              <p className={`max-w-sm text-lg leading-relaxed ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>
-               Crafting digital experiences with code and creativity. Based in Bulandshahr, India.
+               Crafting digital experiences with code and creativity. Based in Uttar Pradesh, India.
              </p>
           </Reveal>
         </div>

@@ -68,7 +68,7 @@ export const SKILLS_STATS = [
 ];
 
 export const EDUCATION_TIMELINE = [
-  { title: "B.C.A.", year: "2022 - Present", place: "CCS University, Meerut", desc: "Specializing in Web Development & Data Structures." },
+  { title: "B.C.A.", year: "2022 - 2025", place: "CCS University, Meerut", desc: "Specializing in Web Development & Data Structures." },
   { title: "Intermediate", year: "2022", place: "UP Board", desc: "Completed with focus on Mathematics and Computer Science." },
   { title: "High School", year: "2020", place: "UP Board", desc: "Foundation in Computer Applications." },
 ];

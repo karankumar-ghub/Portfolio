@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import CustomCursor from './components/CustomCursor';
 import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import ProjectsPage from './pages/ProjectsPage';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import NotFound from './pages/NotFound';
-import ProjectDetails from './pages/ProjectDetails';
-import Lab from './pages/Lab';
+import Loading from './components/Loading';
+
+
+const Home = lazy(() => import('./pages/Home'));
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+const ProjectDetails = lazy(() => import('./pages/ProjectDetails'));
+const Lab = lazy(() => import('./pages/Lab'));
+
+
+
 
 export default function App() {
   const [isDark, setIsDark] = useState(true);
@@ -35,6 +41,7 @@ export default function App() {
       <Navbar isDark={isDark} toggleTheme={toggleTheme} />
 
       <main className="relative z-10">
+      <Suspense fallback={<Loading />}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home isDark={isDark} />} />
           <Route path="/projects" element={<ProjectsPage isDark={isDark} />} />
@@ -45,6 +52,7 @@ export default function App() {
           <Route path="*" element={<NotFound isDark={isDark} />} />
           
         </Routes>
+        </Suspense>
       </main>
     </div>
   );

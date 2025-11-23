@@ -50,7 +50,12 @@ const ProjectDetails = ({ isDark }) => {
         {/* Hero Image */}
         <Reveal delay={0.1}>
             <div className="w-full aspect-video rounded-3xl overflow-hidden mb-16 bg-zinc-900">
-            <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+            <img 
+            src={project.image} 
+            alt={project.title} 
+            loading="lazy" 
+            decoding="async" 
+            className="w-full h-full object-cover" />
             </div>
         </Reveal>
 
