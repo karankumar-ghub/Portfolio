@@ -73,7 +73,8 @@ export const CERTIFICATIONS = [
 
 export const SOCIAL_LINKS = [
     { name: 'LinkedIn', href: 'https://linkedin.com/in/your-id' },
-    { name: 'GitHub', href: 'https://github.com/your-id' },
-    { name: 'Twitter', href: 'https://twitter.com/your-id' },
-    { name: 'Instagram', href: 'https://instagram.com/your-id' }
+    { name: 'GitHub', href: 'https://github.com/karankumar-ghub' },
+    { name: 'Facebook', href: 'https://www.facebook.com/realkaranrajput' },
+    { name: 'Instagram', href: 'https://www.instagram.com/karan.creats/' },
+    { name: 'Telegram', href: 'https://t.me/KaranDRajput' }
   ];
