@@ -62,16 +62,18 @@ const FeaturedProjects = ({ isDark }) => {
                  <div className="space-y-3">
                     <div className="flex justify-between items-start">
                         <div>
-                            <span className="font-mono text-xs text-cyan-500 uppercase tracking-widest block mb-1">
+                        <span className={`font-mono text-xs uppercase tracking-widest block mb-1 
+    ${isDark ? 'text-cyan-400' : 'text-cyan-700'} 
+`}>
                                 {project.category}
                             </span>
                             <h3 className={`text-3xl font-bold ${isDark ? 'text-white' : 'text-black'}`}>
                                 {project.title}
                             </h3>
                         </div>
-                        <a href="#" className={`p-3 rounded-full border ${isDark ? 'border-white/20 text-white' : 'border-black/20 text-black'}`}>
+                        <div className={`p-3 rounded-full border ...`} aria-label="View Project Details">
                            <ArrowUpRight size={20} />
-                        </a>
+                        </div>
                     </div>
                     
                     <p className={`text-base leading-relaxed ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>

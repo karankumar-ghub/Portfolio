@@ -94,8 +94,10 @@ const Contact = ({ isDark }) => {
                {/* ... (Inputs same as before) ... */}
                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-2">
-                     <label className={`text-sm font-bold uppercase tracking-wider ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>Your Name</label>
+
+                     <label htmlFor="name" className={`text-sm font-bold uppercase tracking-wider ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>Your Name</label>
                      <input 
+                        id="name"
                         type="text" 
                         name="name"
                         value={formData.name}
@@ -109,8 +111,9 @@ const Contact = ({ isDark }) => {
                      />
                   </div>
                   <div className="space-y-2">
-                     <label className={`text-sm font-bold uppercase tracking-wider ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>Your Email</label>
+                     <label htmlFor="email" className={`text-sm font-bold uppercase tracking-wider ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>Your Email</label>
                      <input 
+                        id="email"
                         type="email" 
                         name="email"
                         value={formData.email}
@@ -152,8 +155,9 @@ const Contact = ({ isDark }) => {
 
                {/* Message Area */}
                <div className="space-y-2">
-                  <label className={`text-sm font-bold uppercase tracking-wider ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>Message</label>
+                  <label htmlFor="message" className={`text-sm font-bold uppercase tracking-wider ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>Message</label>
                   <textarea 
+                     id="message"
                      rows="5"
                      name="message"
                      value={formData.message}

@@ -35,7 +35,7 @@ const Navbar = ({ isDark, toggleTheme }) => {
                 key={item}
                 to={path}
                 className={`text-sm font-bold uppercase tracking-wider transition-colors interactive
-                  ${isActive(path) ? 'text-cyan-400' : 'text-zinc-300 hover:text-white'} 
+                  ${isActive(path) ? (isDark ? 'text-cyan-400' : 'text-cyan-600') : 'text-zinc-300 hover:text-white'} 
                 `}
               >
                 {item}
@@ -43,19 +43,19 @@ const Navbar = ({ isDark, toggleTheme }) => {
             );
           })}
           <div className="w-px h-4 bg-white/20 mx-2"></div>
-          <button onClick={toggleTheme} className="hover:text-cyan-400 transition-colors interactive">
+          <button onClick={toggleTheme} aria-label="Toggle Dark Mode" className={`hover:${(isDark ? 'text-cyan-400' : 'text-cyan-600')} transition-colors interactive`}>
             {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
         </div>
 
         {/* Mobile Menu Toggle */}
         <div className="md:hidden flex gap-4 z-50">
-           <button onClick={toggleTheme} className="bg-white/10 p-2 rounded-full interactive">
+           <button onClick={toggleTheme} aria-label="Toggle Dark Mode" className="bg-white/10 p-2 rounded-full interactive">
              {isDark ? <Sun size={18} /> : <Moon size={18} />}
            </button>
            <button 
              onClick={() => setIsOpen(!isOpen)} 
-             className="bg-white/10 p-2 rounded-full interactive"
+             aria-label="Toggle Menu" className="bg-white/10 p-2 rounded-full interactive"
            >
              {isOpen ? <X size={18} /> : <Menu size={18} />}
            </button>
