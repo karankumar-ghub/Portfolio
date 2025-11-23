@@ -32,6 +32,10 @@ const Toolkit = ({ isDark }) => (
 
 const About = ({ isDark }) => (
   <PageTransition>
+    <Helmet>
+        <title>Karan Kumar | Creative Developer</title>
+        <meta name="description" content="Portfolio of Karan Kumar, a Creative Developer specializing in React, GSAP, and UI/UX Design." />
+      </Helmet>
     <section className="min-h-screen pt-32 pb-20 px-6 md:px-20 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-32">
         <div>

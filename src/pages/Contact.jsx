@@ -68,6 +68,10 @@ const Contact = ({ isDark }) => {
   // ... (Return statement is largely the same, just update the <form> and button) ...
   return (
     <PageTransition>
+      <Helmet>
+        <title>Karan Kumar | Creative Developer</title>
+        <meta name="description" content="Portfolio of Karan Kumar, a Creative Developer specializing in React, GSAP, and UI/UX Design." />
+      </Helmet>
       <section className="min-h-screen flex flex-col px-6 md:px-20 pt-32 pb-20">
          {/* ... (Header section same) ... */}
          <div className="text-center max-w-4xl mx-auto mb-20">

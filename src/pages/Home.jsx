@@ -6,7 +6,8 @@ import Marquee from '../components/Marquee';
 import FeaturedProjects from '../components/FeaturedProjects';
 import Footer from '../components/Footer';
 import Reveal from '../components/Reveal';
-import { SERVICES } from '../constants'; // <--- Importing data
+import { SERVICES } from '../constants';
+import { Helmet } from 'react-helmet-async'; // <--- Importing data
 
 const ServicesSection = ({ isDark }) => {
   const navigate = useNavigate();
@@ -58,6 +59,10 @@ const Home = ({ isDark }) => {
 
   return (
     <PageTransition>
+      <Helmet>
+        <title>Karan Kumar | Creative Developer</title>
+        <meta name="description" content="Portfolio of Karan Kumar, a Creative Developer specializing in React, GSAP, and UI/UX Design." />
+      </Helmet>
       <section className="min-h-screen flex flex-col justify-center px-6 md:px-20 relative overflow-hidden pt-32 pb-20">
         <div className={`absolute -right-20 top-1/4 text-[40vh] font-black leading-none opacity-5 select-none pointer-events-none
           ${isDark ? 'text-white' : 'text-black'}

@@ -8,6 +8,10 @@ import { PROCESS_STEPS } from '../constants';
 const ProjectsPage = ({ isDark }) => {
   return (
     <PageTransition>
+      <Helmet>
+        <title>Karan Kumar | Creative Developer</title>
+        <meta name="description" content="Portfolio of Karan Kumar, a Creative Developer specializing in React, GSAP, and UI/UX Design." />
+      </Helmet>
       <div className="pt-32">
          {/* Featured Projects already handles its own internal animation via the component */}
          <FeaturedProjects isDark={isDark} />
