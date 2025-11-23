@@ -5,7 +5,6 @@ import Lenis from 'lenis';
 import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
 import Loading from './components/Loading';
-import Preloader from './components/Preloader';
 
 // --- LAZY LOAD PAGES ---
 const Home = lazy(() => import('./pages/Home'));
@@ -18,17 +17,9 @@ const Lab = lazy(() => import('./pages/Lab'));
 
 export default function App() {
   const [isDark, setIsDark] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
 
   const toggleTheme = () => setIsDark(!isDark);
-
-  // Scroll to top on finish
-  useEffect(() => {
-    if (!isLoading) {
-        window.scrollTo(0,0);
-    }
-  }, [isLoading]);
 
   // Smooth Scroll
   useEffect(() => {
@@ -56,7 +47,6 @@ export default function App() {
   }, []);
 
   return (
-    // REMOVED 'cursor-none' from the class list below so your normal mouse shows up
     <div className={`min-h-screen font-sans transition-colors duration-500
       ${isDark 
         ? 'bg-zinc-950 text-zinc-200 selection:bg-cyan-500/30 selection:text-cyan-200' 
@@ -64,32 +54,26 @@ export default function App() {
       }
     `}>
       <ScrollToTop />
-      {/* REMOVED <CustomCursor /> component */}
       
-      <AnimatePresence mode="wait">
-        {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
-      </AnimatePresence>
-
+      {/* Background Noise */}
       <div className={`fixed inset-0 opacity-[0.03] pointer-events-none z-0
         ${isDark ? 'bg-[url("https://grainy-gradients.vercel.app/noise.svg")] invert' : 'bg-[url("https://grainy-gradients.vercel.app/noise.svg")]'}
       `}></div>
 
-      {!isLoading && <Navbar isDark={isDark} toggleTheme={toggleTheme} />}
+      <Navbar isDark={isDark} toggleTheme={toggleTheme} />
 
       <main className="relative z-10">
         <Suspense fallback={<Loading />}>
           <AnimatePresence mode="wait">
-             {!isLoading && (
-                <Routes location={location} key={location.pathname}>
-                  <Route path="/" element={<Home isDark={isDark} />} />
-                  <Route path="/projects" element={<ProjectsPage isDark={isDark} />} />
-                  <Route path="/projects/:id" element={<ProjectDetails isDark={isDark} />} />
-                  <Route path="/lab" element={<Lab isDark={isDark} />} />
-                  <Route path="/about" element={<About isDark={isDark} />} />
-                  <Route path="/contact" element={<Contact isDark={isDark} />} />
-                  <Route path="*" element={<NotFound isDark={isDark} />} />
-                </Routes>
-             )}
+            <Routes location={location} key={location.pathname}>
+              <Route path="/" element={<Home isDark={isDark} />} />
+              <Route path="/projects" element={<ProjectsPage isDark={isDark} />} />
+              <Route path="/projects/:id" element={<ProjectDetails isDark={isDark} />} />
+              <Route path="/lab" element={<Lab isDark={isDark} />} />
+              <Route path="/about" element={<About isDark={isDark} />} />
+              <Route path="/contact" element={<Contact isDark={isDark} />} />
+              <Route path="*" element={<NotFound isDark={isDark} />} />
+            </Routes>
           </AnimatePresence>
         </Suspense>
       </main>

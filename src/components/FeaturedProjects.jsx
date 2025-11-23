@@ -1,53 +1,58 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
-import { motion, useScroll, useTransform, useSpring, useVelocity } from 'framer-motion'; // <--- Motion imports
+import { motion, useScroll, useTransform, useSpring, useVelocity } from 'framer-motion';
 import Reveal from './Reveal';
 import { PROJECTS } from '../constants';
 
 const FeaturedProjects = ({ isDark }) => {
   const [activeProject, setActiveProject] = useState(PROJECTS[0]);
-  const mousePos = useRef({ x: 0, y: 0 });
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const sectionRef = useRef(null);
 
-  // --- VELOCITY LOGIC ---
+  // --- VELOCITY TEXT SKEW (Kept this, it's efficient) ---
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
   const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
-  
-  // Map scroll speed to skew angle (0 speed = 0 skew, fast speed = max 5 deg skew)
   const skewX = useTransform(smoothVelocity, [-1000, 0, 1000], [-5, 0, 5]);
-  // ----------------------
+  // --------------------------
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      mousePos.current = { x: e.clientX, y: e.clientY };
-      if (window.innerWidth > 768) {
-         const xPct = (e.clientX / window.innerWidth) - 0.5;
-         const yPct = (e.clientY / window.innerHeight) - 0.5;
-         setTilt({ x: yPct * 5, y: xPct * -5 });
-      }
+    // Scroll Logic: Check which project is in the middle of the screen
+    let ticking = false;
+    const mousePosRef = { x: 0, y: 0 };
+
+    // We only track mouse position ONCE per frame to check for hover interactions
+    const trackMouseRaw = (e) => {
+        mousePosRef.x = e.clientX;
+        mousePosRef.y = e.clientY;
     };
 
     const handleScroll = () => {
-      const elementUnderCursor = document.elementFromPoint(mousePos.current.x, mousePos.current.y);
-      if (elementUnderCursor) {
-        const projectRow = elementUnderCursor.closest('[data-project-id]');
-        if (projectRow) {
-          const id = projectRow.getAttribute('data-project-id');
-          const newActive = PROJECTS.find(p => p.id === id);
-          if (newActive && newActive.id !== activeProject.id) {
-            setActiveProject(newActive);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Check what element is under the "virtual" mouse position
+          const elementUnderCursor = document.elementFromPoint(mousePosRef.x, mousePosRef.y);
+          if (elementUnderCursor) {
+            const projectRow = elementUnderCursor.closest('[data-project-id]');
+            if (projectRow) {
+              const id = projectRow.getAttribute('data-project-id');
+              const newActive = PROJECTS.find(p => p.id === id);
+              if (newActive && newActive.id !== activeProject.id) {
+                setActiveProject(newActive);
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', trackMouseRaw);
     window.addEventListener('scroll', handleScroll, { passive: true });
+
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousemove', trackMouseRaw);
       window.removeEventListener('scroll', handleScroll);
     };
   }, [activeProject]);
@@ -85,9 +90,8 @@ const FeaturedProjects = ({ isDark }) => {
                                 </div>
                                 
                                 <div className="flex justify-between items-center">
-                                    {/* APPLY SKEW TO TITLE */}
                                     <motion.h3 
-                                        style={{ skewX }} // <--- The Magic Line
+                                        style={{ skewX }}
                                         className={`text-4xl md:text-6xl font-black transition-all duration-500 origin-left
                                             ${isDark 
                                                 ? (activeProject.id === project.id ? 'text-white translate-x-4' : 'text-zinc-800 hover:text-zinc-600') 
@@ -113,20 +117,16 @@ const FeaturedProjects = ({ isDark }) => {
             </div>
 
             {/* --- PREVIEW IMAGE SECTION (Right - Sticky) --- */}
-            <div className="hidden md:block w-1/2 h-[60vh] sticky top-32 perspective-1000">
-                 <div 
-                    className="w-full h-full relative overflow-hidden rounded-3xl bg-zinc-900 border border-white/5 shadow-2xl transition-transform duration-200 ease-out"
-                    style={{ 
-                        transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`
-                    }}
-                 >
+            <div className="hidden md:block w-1/2 h-[60vh] sticky top-32">
+                 {/* Removed 3D Transform styles here */}
+                 <div className="w-full h-full relative overflow-hidden rounded-3xl bg-zinc-900 border border-white/5 shadow-2xl">
                     {PROJECTS.map((project) => (
                         <div
                             key={project.id}
                             className={`absolute inset-0 w-full h-full transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]
                                 ${activeProject.id === project.id 
-                                    ? 'opacity-100 scale-100 translate-y-0 rotate-0 blur-0 z-10'  
-                                    : 'opacity-0 scale-90 translate-y-12 rotate-2 blur-lg z-0'   
+                                    ? 'opacity-100 scale-100 translate-y-0 blur-0 z-10'  
+                                    : 'opacity-0 scale-90 translate-y-12 blur-lg z-0'   
                                 }
                             `}
                         >
@@ -156,6 +156,7 @@ const FeaturedProjects = ({ isDark }) => {
                     ))}
                  </div>
             </div>
+
         </div>
       </div>
     </section>
