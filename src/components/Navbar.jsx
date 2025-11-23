@@ -14,7 +14,7 @@ const Navbar = ({ isDark, toggleTheme }) => {
     setIsOpen(false);
   }, [location.pathname]);
 
-  const navLinks = ['Home', 'Projects', 'About', 'Contact'];
+  const navLinks = ['Home', 'Projects', 'About', 'Contact', 'Lab'];
 
   return (
     <>

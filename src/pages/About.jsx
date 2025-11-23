@@ -1,9 +1,11 @@
 import React from 'react';
 import { Layers, Check } from 'lucide-react';
+import { FileText, Download } from 'lucide-react';
 import PageTransition from '../components/PageTransition';
 import Footer from '../components/Footer';
 import Reveal from '../components/Reveal';
 import { TOOLKIT_ITEMS, SKILLS_STATS, EDUCATION_TIMELINE, CERTIFICATIONS } from '../constants';
+import { Helmet } from 'react-helmet-async';
 
 
 const Toolkit = ({ isDark }) => (
@@ -33,7 +35,7 @@ const Toolkit = ({ isDark }) => (
 const About = ({ isDark }) => (
   <PageTransition>
     <Helmet>
-        <title>Karan Kumar | Creative Developer</title>
+            <title>Karan Kumar | Creative Developer</title>
         <meta name="description" content="Portfolio of Karan Kumar, a Creative Developer specializing in React, GSAP, and UI/UX Design." />
       </Helmet>
     <section className="min-h-screen pt-32 pb-20 px-6 md:px-20 max-w-7xl mx-auto">
@@ -55,7 +57,21 @@ const About = ({ isDark }) => (
                 <p>My journey started with simple HTML pages and has evolved into building complex, interactive web applications. I obsess over pixel-perfect design, smooth animations, and clean, maintainable code.</p>
               </div>
           </Reveal>
-
+          <Reveal delay={0.2}>
+      <a 
+        href="/resume.pdf" 
+        download="Karan_Kumar_Resume.pdf"
+        className={`inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-lg transition-all interactive hover:-translate-y-1 hover:shadow-lg mt-12
+          ${isDark 
+            ? 'bg-white text-black hover:bg-cyan-400' 
+            : 'bg-black text-white hover:bg-cyan-600'}
+        `}
+      >
+        <FileText size={20} />
+        Download Resume
+        <Download size={16} className="opacity-50" />
+      </a>
+    </Reveal>
           <div className="mt-16 grid grid-cols-2 gap-6">
             {SKILLS_STATS.map((skill, i) => (
               <Reveal key={i} delay={0.2 + (i * 0.1)}>

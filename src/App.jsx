@@ -8,6 +8,8 @@ import ProjectsPage from './pages/ProjectsPage';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
+import ProjectDetails from './pages/ProjectDetails';
+import Lab from './pages/Lab';
 
 export default function App() {
   const [isDark, setIsDark] = useState(true);
@@ -37,8 +39,11 @@ export default function App() {
           <Route path="/" element={<Home isDark={isDark} />} />
           <Route path="/projects" element={<ProjectsPage isDark={isDark} />} />
           <Route path="/about" element={<About isDark={isDark} />} />
+          <Route path="/projects/:id" element={<ProjectDetails isDark={isDark} />} />
+          <Route path="/lab" element={<Lab isDark={isDark} />} />
           <Route path="/contact" element={<Contact isDark={isDark} />} />
           <Route path="*" element={<NotFound isDark={isDark} />} />
+          
         </Routes>
       </main>
     </div>

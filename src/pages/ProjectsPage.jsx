@@ -4,11 +4,13 @@ import FeaturedProjects from '../components/FeaturedProjects';
 import Footer from '../components/Footer';
 import Reveal from '../components/Reveal';
 import { PROCESS_STEPS } from '../constants';
+import { Helmet } from 'react-helmet-async';
 
 const ProjectsPage = ({ isDark }) => {
   return (
     <PageTransition>
       <Helmet>
+      
         <title>Karan Kumar | Creative Developer</title>
         <meta name="description" content="Portfolio of Karan Kumar, a Creative Developer specializing in React, GSAP, and UI/UX Design." />
       </Helmet>

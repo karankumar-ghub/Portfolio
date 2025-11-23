@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import Reveal from './Reveal';
 import { PROJECTS } from '../constants';
@@ -15,7 +16,7 @@ const FeaturedProjects = ({ isDark }) => {
         <div className="grid grid-cols-1 gap-16 md:gap-24">
           {PROJECTS.map((project, idx) => (
         <Reveal key={idx} delay={idx * 0.2}>
-            <div key={idx} className="group w-full interactive">
+            <Link to={`/projects/${project.id}`} key={idx} className="group w-full interactive">
               
               {/* --- DESKTOP LAYOUT (Image + Hover Overlay) --- */}
               <div className="hidden md:block relative overflow-hidden rounded-3xl aspect-[21/9] cursor-pointer bg-zinc-900">
@@ -85,7 +86,7 @@ const FeaturedProjects = ({ isDark }) => {
                  </div>
               </div>
 
-            </div>
+            </Link>
         </Reveal>
           ))}
         </div>

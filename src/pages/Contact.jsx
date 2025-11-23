@@ -3,6 +3,7 @@ import { Phone, Github, Linkedin, Instagram, PenTool, Calendar, MessageSquare, S
 import emailjs from '@emailjs/browser';
 import PageTransition from '../components/PageTransition';
 import Footer from '../components/Footer';
+import { Helmet } from 'react-helmet-async';
 
 // ... (Keep FAQItem component the same) ...
 const FAQItem = ({ q, a, isDark }) => {

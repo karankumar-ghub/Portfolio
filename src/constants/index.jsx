@@ -3,25 +3,34 @@ import { Monitor, PenTool, Cpu, Globe, Code, Terminal, Github, Layout } from 'lu
 // --- PROJECTS ---
 export const PROJECTS = [
   {
+    id: "neon-ecommerce", // <--- Unique ID for the URL
     title: "Neon E-Commerce",
     category: "Web Application",
     desc: "A futuristic shopping dashboard featuring dark mode, real-time cart updates, and GSAP page transitions.",
-    tech: ["React", "Redux", "Tailwind"],
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&w=1600&q=80"
+    tech: ["React", "Redux", "Tailwind", "GSAP"],
+    image: "https://imgs.search.brave.com/GNMXAT8h7hzMjc-BZTwnVxIGbynOF0bK5-2oScWN_f8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA0LzA2LzQyLzgy/LzM2MF9GXzQwNjQy/ODI0OV93THZ4TFU5/ZlJXb25acmdaaThs/akJaMmVjamlpMW5B/by5qcGc",
+    challenge: "The main challenge was managing complex global state for the shopping cart while maintaining 60fps animations. The dark mode toggle also needed to switch themes instantly without page reload.",
+    solution: "I utilized Redux Toolkit for efficient state management and CSS variables for the theme engine. For animations, I used GSAP's timeline feature to sequence the entrance effects, ensuring no layout thrashing occurred."
   },
   {
+    id: "cyber-social",
     title: "Cyber Social",
     category: "Social Platform",
     desc: "A minimal social media web app focusing on clean typography and smooth interaction animations.",
-    tech: ["Next.js", "Framer Motion", "Prisma"],
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1600&q=80"
+    tech: ["Next.js", "Framer Motion", "Prisma", "PostgreSQL"],
+    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1600&q=80",
+    challenge: "Building a real-time feed that scales was difficult. I also wanted to implement a 'skeleton loading' state that felt premium, not generic.",
+    solution: "I used Next.js server-side rendering (SSR) for initial load speed and SWR for real-time data fetching. The skeleton screens were custom-designed in Figma to match the exact layout of the final content."
   },
   {
+    id: "portfolio-v1",
     title: "Portfolio V1",
     category: "Personal Website",
     desc: "My previous portfolio site. Built to demonstrate mastery of grid layouts and responsive design principles.",
     tech: ["HTML", "SCSS", "JavaScript"],
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80"
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
+    challenge: "This was my first attempt at a fully responsive grid system without using any CSS frameworks like Bootstrap or Tailwind.",
+    solution: "I relied heavily on CSS Grid and Flexbox. I created a custom SASS mixin library to handle breakpoints, ensuring the typography scaled fluidly from mobile to 4K screens."
   }
 ];
 
