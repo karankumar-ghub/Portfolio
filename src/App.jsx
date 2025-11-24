@@ -16,7 +16,7 @@ const ProjectDetails = lazy(() => import('./pages/ProjectDetails'));
 const Lab = lazy(() => import('./pages/Lab'));
 
 export default function App() {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
   const location = useLocation();
 
   const toggleTheme = () => setIsDark(!isDark);

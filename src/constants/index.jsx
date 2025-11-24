@@ -74,8 +74,8 @@ export const EDUCATION_TIMELINE = [
 ];
 
 export const CERTIFICATIONS = [
-  "Advance Computer Course", 
-  "Complete MS Office Specialist", 
+  "Graphic Designing", 
+  "JavaScript Mastery", 
   "Responsive Web Design", 
   "React.js Developer"
 ];
