@@ -1,16 +1,30 @@
-# React + Vite
+# ⚡ Karan Kumar | Creative Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> A modern, high-performance portfolio website built to showcase my projects and UI experiments.
 
-Currently, two official plugins are available:
+![Portfolio Preview](public/og-image.png) 
+## 🚀 Live Demo
+[**View Live Site**](https://your-portfolio-link.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠 Tech Stack
+* **Framework:** React + Vite
+* **Styling:** Tailwind CSS
+* **Animations:** Framer Motion + GSAP
+* **Routing:** React Router v6 (Dynamic Routes)
+* **Forms:** EmailJS
+* **SEO:** React Helmet Async
+* **Deployment:** Vercel
 
-## React Compiler
+## ✨ Features
+* **Dark/Light Mode:** Persisted theme state with system preference detection.
+* **Page Transitions:** Smooth exit/entry animations using `AnimatePresence`.
+* **Case Studies:** Dynamic `/projects/:id` routing to showcase detailed project insights.
+* **The Lab:** A dedicated section for experimental UI components and micro-interactions.
+* **Fully Responsive:** Optimized for all devices from mobile to 4K screens.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📦 Run Locally
 
-## Expanding the ESLint configuration
+Clone the project
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+  git clone [https://github.com/karankumar-ghub/portfolio.git](https://github.com/karankumar-ghub/portfolio.git)
