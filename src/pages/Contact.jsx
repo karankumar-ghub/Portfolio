@@ -216,7 +216,7 @@ const Contact = ({ isDark }) => {
                 { q: "Are you available for freelance?", a: "Yes, I take on selected freelance projects that align with my skills. Feel free to reach out!" },
                 { q: "What is your tech stack?", a: "I primarily work with the MERN stack (MongoDB, Express, React, Node.js) alongside Next.js and Tailwind CSS." },
                 { q: "Do you do UI design?", a: "Absolutely. I believe design and development go hand in hand. I can design your site in Figma before coding it." },
-                { q: "Where are you located?", a: "I am based on Uttarpradesh, India, but I work remotely with clients worldwide." },
+                { q: "Where are you located?", a: "I am based in Uttarpradesh, India, but I work remotely with clients worldwide." },
               ].map((item, i) => (
                  <FAQItem key={i} q={item.q} a={item.a} isDark={isDark} />
               ))}
