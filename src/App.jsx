@@ -63,7 +63,7 @@ export default function App() {
       <Navbar isDark={isDark} toggleTheme={toggleTheme} />
 
       <main className="relative z-10">
-        <Suspense fallback={<Loading />}>
+      <Suspense fallback={<Loading isDark={isDark} />}>
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<Home isDark={isDark} />} />
