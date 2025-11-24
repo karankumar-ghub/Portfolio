@@ -27,4 +27,4 @@
 Clone the project
 
 ```bash
-  git clone [https://github.com/karankumar-ghub/portfolio.git](https://github.com/karankumar-ghub/portfolio.git)
+  git clone https://github.com/karankumar-ghub/portfolio.git

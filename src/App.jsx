@@ -50,7 +50,7 @@ export default function App() {
     <div className={`min-h-screen font-sans transition-colors duration-500
       ${isDark 
         ? 'bg-zinc-950 text-zinc-200 selection:bg-cyan-500/30 selection:text-cyan-200' 
-        : 'bg-white text-zinc-900 selection:bg-cyan-200 selection:text-cyan-900'
+        : 'bg-white text-zinc-900 selection:bg-cyan-200 selection:text-cyan-900' // <--- Changed bg-white to bg-zinc-50
       }
     `}>
       <ScrollToTop />

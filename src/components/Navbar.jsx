@@ -37,7 +37,7 @@ const Navbar = ({ isDark, toggleTheme }) => {
            <div className={`flex items-center gap-2 backdrop-blur-md px-2 py-2 rounded-full border transition-colors duration-500
               ${isDark 
                 ? 'bg-zinc-900/50 border-white/10' 
-                : 'bg-white/50 border-black/5 shadow-sm'} 
+                : 'bg-white/50 border-black/10 shadow-sm'} 
            `}>
             {navLinks.map((item) => {
                  const path = item === 'Home' ? '/' : `/${item.toLowerCase()}`;
@@ -55,7 +55,7 @@ const Navbar = ({ isDark, toggleTheme }) => {
                         layoutId="nav-pill"
                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         className={`absolute inset-0 rounded-full -z-10
-                          ${isDark ? 'bg-zinc-800' : 'bg-white shadow-md'}
+                          ${isDark ? 'bg-zinc-800' : 'bg-cyan-500 shadow-md'}
                         `}
                       />
                     )}
@@ -63,7 +63,7 @@ const Navbar = ({ isDark, toggleTheme }) => {
                     {/* Link Text */}
                     <span className={`text-sm font-bold uppercase tracking-wider transition-colors duration-300 relative z-10
                       ${active 
-                         ? (isDark ? 'text-cyan-400' : 'text-cyan-500') // <--- Active Color
+                         ? (isDark ? 'text-cyan-400' : 'text-white') // <--- Active Color
                          : (isDark ? 'text-zinc-400 group-hover:text-white' : 'text-zinc-500 group-hover:text-black') // <--- Inactive Color
                       } 
                     `}>
