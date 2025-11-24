@@ -30,7 +30,7 @@ const Navbar = ({ isDark, toggleTheme }) => {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-2 md:gap-8 bg-zinc-900/50 backdrop-blur-md px-6 py-3 rounded-full border border-white/10">
 
-        <div className="flex items-center gap-2 md:gap-6 bg-zinc-900/50 backdrop-blur-md px-6 py-3 rounded-full border border-white/10">
+        
         {navLinks.map((item) => {
              const path = item === 'Home' ? '/' : `/${item.toLowerCase()}`;
              return (
@@ -45,7 +45,7 @@ const Navbar = ({ isDark, toggleTheme }) => {
               </Link>
             );
           })}
-          </div>
+          
           <div className="w-px h-4 bg-white/20 mx-2"></div>
           <button onClick={toggleTheme} aria-label="Toggle Dark Mode" className={`hover:${(isDark ? 'text-cyan-400' : 'text-cyan-600')} transition-colors interactive`}>
             {isDark ? <Sun size={18} /> : <Moon size={18} />}

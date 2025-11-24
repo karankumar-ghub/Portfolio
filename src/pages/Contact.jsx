@@ -190,7 +190,7 @@ const Contact = ({ isDark }) => {
          <div className="flex flex-wrap justify-center gap-8 mb-20">
             {/* (Social links code) */}
              {[
-              { icon: <Phone />, label: "+91 89580 73763", href: "tel:+918958073763" },
+              { icon: <Phone />, label: "Call", href: "tel:+918958073763" },
               { icon: <Github />, label: "Github", href: "#" },
               { icon: <Linkedin />, label: "LinkedIn", href: "#" },
               { icon: <Instagram />, label: "Instagram", href: "#" },
@@ -213,10 +213,10 @@ const Contact = ({ isDark }) => {
             <h3 className={`text-3xl font-bold mb-12 ${isDark ? 'text-white' : 'text-black'}`}>Frequently Asked Questions</h3>
             <div className="space-y-2">
               {[
-                { q: "Are you available for freelance?", a: "Yes, I take on select freelance projects that align with my skills. Feel free to reach out!" },
+                { q: "Are you available for freelance?", a: "Yes, I take on selected freelance projects that align with my skills. Feel free to reach out!" },
                 { q: "What is your tech stack?", a: "I primarily work with the MERN stack (MongoDB, Express, React, Node.js) alongside Next.js and Tailwind CSS." },
                 { q: "Do you do UI design?", a: "Absolutely. I believe design and development go hand in hand. I can design your site in Figma before coding it." },
-                { q: "Where are you located?", a: "I am based in Bulandshahr, India, but I work remotely with clients worldwide." },
+                { q: "Where are you located?", a: "I am based on Uttarpradesh, India, but I work remotely with clients worldwide." },
               ].map((item, i) => (
                  <FAQItem key={i} q={item.q} a={item.a} isDark={isDark} />
               ))}

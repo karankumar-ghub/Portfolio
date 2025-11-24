@@ -10,6 +10,8 @@ import { SERVICES } from '../constants';
 import { Helmet } from 'react-helmet-async';
 import Testimonials from '../components/Testimonials'; 
 import TimeStatus from '../components/TimeStatus';
+import HyperText from '../components/HyperText'; // <--- Import
+import WordReveal from '../components/WordReveal'; // <--- Import
 
 
 const ServicesSection = ({ isDark }) => {
