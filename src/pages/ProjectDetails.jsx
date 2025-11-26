@@ -60,7 +60,7 @@ const ProjectDetails = ({ isDark }) => {
 
         {/* Hero Image */}
         <Reveal delay={0.1}>
-            <div className="w-full aspect-video rounded-3xl overflow-hidden mb-16 bg-zinc-900">
+            <div className="w-full h-full aspect-video rounded-3xl overflow-hidden mb-16 bg-zinc-900">
             <img 
             src={project.image} 
             alt={project.title} 
@@ -70,63 +70,115 @@ const ProjectDetails = ({ isDark }) => {
             </div>
         </Reveal>
 
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-20">
-            {/* Left Sidebar (Tech Stack & Links) */}
-            <div className="lg:col-span-1 space-y-8">
-                <Reveal delay={0.2}>
-                    <div>
-                        <h3 className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-black'}`}>Technologies</h3>
-                        <div className="flex flex-wrap gap-2">
-                            {project.tech.map(t => (
-                                <span key={t} className={`px-3 py-1 rounded-full text-xs font-mono border ${isDark ? 'border-white/20 text-zinc-300' : 'border-black/10 text-zinc-600'}`}>
-                                    {t}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-                </Reveal>
-
-                <Reveal delay={0.3}>
-                    <div className="flex gap-4">
-                        <a href="#" target="_blank" className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold border transition-all interactive
-                            ${isDark ? 'bg-white text-black hover:bg-cyan-400' : 'bg-black text-white hover:bg-cyan-600'}
-                        `}>
-                            Live Demo <ExternalLink size={16} />
-                        </a>
-                        <a href="#" target="_blank" className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold border transition-all interactive
-                            ${isDark ? 'border-white/20 text-white hover:bg-white/10' : 'border-black/20 text-black hover:bg-black/5'}
-                        `}>
-                            <Github size={18} /> Code
-                        </a>
-                    </div>
-                </Reveal>
-            </div>
-
-            {/* Right Content (The Story) */}
-            <div className="lg:col-span-2 space-y-12">
-                <Reveal delay={0.2}>
-                    <div>
-                        <h3 className={`text-2xl font-bold mb-4 ${isDark ? 'text-white' : 'text-black'}`}>Overview</h3>
-                        <p className={`text-lg leading-relaxed ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>{project.desc}</p>
-                    </div>
-                </Reveal>
-
-                <Reveal delay={0.3}>
-                    <div>
-                        <h3 className={`text-2xl font-bold mb-4 ${isDark ? 'text-white' : 'text-black'}`}>The Challenge</h3>
-                        <p className={`text-lg leading-relaxed ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>{project.challenge}</p>
-                    </div>
-                </Reveal>
-
-                <Reveal delay={0.4}>
-                    <div>
-                        <h3 className={`text-2xl font-bold mb-4 ${isDark ? 'text-white' : 'text-black'}`}>The Solution</h3>
-                        <p className={`text-lg leading-relaxed ${isDark ? 'text-zinc-400' : 'text-zinc-600'}`}>{project.solution}</p>
-                    </div>
-                </Reveal>
-            </div>
+        {/* Content / Case Study Block */}
+<div className="mb-24 max-w-5xl mx-auto">
+  {/* Technologies + Links (Top) */}
+  <div className="mb-12 space-y-8">
+    <Reveal delay={0.2}>
+      <div>
+        <h3 className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-black'}`}>
+          Technologies
+        </h3>
+        <div className="flex flex-wrap gap-2">
+          {project.tech.map(t => (
+            <span
+              key={t}
+              className={`px-3 py-1 rounded-full text-xs font-mono border ${
+                isDark
+                  ? 'border-white/20 text-zinc-300'
+                  : 'border-black/10 text-zinc-600'
+              }`}
+            >
+              {t}
+            </span>
+          ))}
         </div>
+      </div>
+    </Reveal>
+
+    <Reveal delay={0.3}>
+      <div className="flex flex-wrap gap-4">
+        <a
+          href="https://flipzonekk.vercel.app/"
+          target="_blank"
+          rel="noreferrer"
+          className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold border transition-all interactive
+            ${isDark ? 'bg-white text-black hover:bg-cyan-400' : 'bg-black text-white hover:bg-cyan-600'}
+          `}
+        >
+          Live Demo <ExternalLink size={16} />
+        </a>
+        <a
+          href="https://github.com/karankumar-ghub/Flipzone"
+          target="_blank"
+          rel="noreferrer"
+          className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold border transition-all interactive
+            ${isDark ? 'border-white/20 text-white hover:bg-white/10' : 'border-black/20 text-black hover:bg-black/5'}
+          `}
+        >
+          <Github size={18} /> Code
+        </a>
+      </div>
+    </Reveal>
+  </div>
+
+  {/* Story Sections (Below) */}
+  <div className="space-y-12 max-w-3xl">
+    <Reveal delay={0.2}>
+      <div>
+        <h3
+          className={`text-2xl font-bold mb-4 ${
+            isDark ? 'text-white' : 'text-black'
+          }`}
+        >
+          Overview
+        </h3>
+        <div
+          className={`text-lg leading-relaxed ${
+            isDark ? 'text-zinc-400' : 'text-zinc-600'
+          }`}
+          dangerouslySetInnerHTML={{ __html: project.desc }}
+        />
+      </div>
+    </Reveal>
+
+    <Reveal delay={0.3}>
+      <div>
+        <h3
+          className={`text-2xl font-bold mb-4 ${
+            isDark ? 'text-white' : 'text-black'
+          }`}
+        >
+          The Challenge
+        </h3>
+        <div
+          className={`text-lg leading-relaxed ${
+            isDark ? 'text-zinc-400' : 'text-zinc-600'
+          }`}
+          dangerouslySetInnerHTML={{ __html: project.challenge }}
+        />
+      </div>
+    </Reveal>
+
+    <Reveal delay={0.4}>
+      <div>
+        <h3
+          className={`text-2xl font-bold mb-4 ${
+            isDark ? 'text-white' : 'text-black'
+          }`}
+        >
+          The Solution
+        </h3>
+        <div
+          className={`text-lg  leading-relaxed ${
+            isDark ? 'text-zinc-400' : 'text-zinc-600'
+          }`}
+          dangerouslySetInnerHTML={{ __html: project.solution }}
+        />
+      </div>
+    </Reveal>
+  </div>
+</div>
       </section>
       <div className={`my-32 p-12 rounded-3xl text-center border relative overflow-hidden
     ${isDark ? 'border-white/10 bg-zinc-900' : 'border-black/10 bg-zinc-100'}

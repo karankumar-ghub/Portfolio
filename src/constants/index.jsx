@@ -1,16 +1,90 @@
 import { Monitor, PenTool, Cpu, Globe, Code, Terminal, Github, Layout } from 'lucide-react';
+import checkoutImg from "../assets/checkout.png"
 
 // --- PROJECTS ---
 export const PROJECTS = [
   {
-    id: "neon-ecommerce", // <--- Unique ID for the URL
-    title: "Neon E-Commerce",
+    id: "flipzone", // <--- Unique ID for the URL
+    title: "FlipZone — Modern E-Commerce",
     category: "Web Application",
-    desc: "A futuristic shopping dashboard featuring dark mode, real-time cart updates, and GSAP page transitions.",
+    desc: `<p>FlipZone is a fully functional, high-fidelity e-commerce web application designed to replicate the complexity of major platforms like Flipkart or Amazon. The goal was not just to build a UI, but to architect a scalable frontend application that handles complex state management, data filtering, and user persistence without a backend.<p/>
+    <br>
+    <p>The project features a distinct "Next-Gen" aesthetic, moving away from generic bootstrap templates to a custom-designed interface using Tailwind CSS variables. It allows users to browse products, filter by dynamic categories, manage a shopping cart, maintain a wishlist, and simulate a secure checkout process.</p>`,
     tech: ["React", "Redux", "Tailwind", "GSAP"],
-    image: "https://imgs.search.brave.com/GNMXAT8h7hzMjc-BZTwnVxIGbynOF0bK5-2oScWN_f8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA0LzA2LzQyLzgy/LzM2MF9GXzQwNjQy/ODI0OV93THZ4TFU5/ZlJXb25acmdaaThs/akJaMmVjamlpMW5B/by5qcGc",
-    challenge: "The main challenge was managing complex global state for the shopping cart while maintaining 60fps animations. The dark mode toggle also needed to switch themes instantly without page reload.",
-    solution: "I utilized Redux Toolkit for efficient state management and CSS variables for the theme engine. For animations, I used GSAP's timeline feature to sequence the entrance effects, ensuring no layout thrashing occurred."
+    image: checkoutImg,
+
+    challenge: `<p>Building a modern e-commerce application presents several architectural and UX hurdles that I needed to solve:</p>
+    <br>
+    <ul class="list-disc pl-8 space-y-2">
+      <li>
+        <p><strong>Complex State Management:</strong> An e-commerce app has "fractured" state. The Cart needs to be accessible from anywhere, the Wishlist needs to persist across sessions, and User Authentication affects the UI globally (e.g., hiding/showing the "Login" button). Passing props down the component tree would have led to unmanageable code.</p>
+      </li>
+    <br>
+      <li>
+        <p><strong>Dynamic Data Filtering:</strong> Users expect to filter products by category, sort by price, and search by keywords simultaneously. Managing these intersecting logic flows while keeping the UI responsive is difficult.</p>
+      </li>
+      <br>
+      <li>
+        <p><strong>Performance & Interaction:</strong> Standard page loads feel clunky. The challenge was to create a "Single Page Application" (SPA) feel where transitions are smooth, and interactive elements like the Cart Sidebar slide in without causing layout shifts.</p>
+      </li>
+      <br>
+      <li>
+        <p><strong>Responsive Complexity:</strong> Displaying data-heavy tables (like specifications) and complex grids (product listings) on mobile devices without breaking the layout.</p>
+      </li>
+    </ul>
+    `,
+
+    solution: `<p>I adopted a component-driven architecture using React and Vite for a high-performance development environment. Here is how I addressed the specific challenges:</p>
+    <br>
+    <p><strong>A. Centralized State with Redux Toolkit</strong></p>
+    <ul class="list-disc pl-8 space-y-2">
+    <li><p><strong>Redux Toolkit Instead of Context:</strong> Instead of using React Context for high-frequency updates (which can lead to unnecessary re-renders), I used Redux Toolkit for predictable and efficient state updates.</p></li>
+    <br>
+    <li><p><strong>Slice Architecture:</strong> I separated concerns into multiple slices such as:</p>
+    <ul class="list-disc pl-8 space-y-2">
+      <li><strong>cartSlice</strong> — handles add/remove/quantity logic</li>
+      <li><strong>wishlistSlice</strong> — toggles favorites</li>
+      <li><strong>authSlice</strong> — manages user session</li>
+      <li><strong>orderSlice</strong> — stores order history</li>
+    </ul>
+    </li>
+    <br>
+    <li><p><strong>Persistence:</strong> Redux reducers sync state with <code>localStorage</code>, ensuring the cart and wishlist remain intact even after a page refresh.</p></li>
+    </ul>
+    <br>
+    <h4><strong>B. Advanced Filtering & Search Engine</strong></h4>
+
+    <ul class="list-disc pl-8 space-y-2">
+    <li><p><strong>Filtering Engine:</strong> I built a robust filtering engine inside the Products page to handle multi-layered logic.</p></li>
+    
+    <li><p><strong>URL-Based State:</strong> I utilized <code>useSearchParams</code> from React Router. This means if a user filters by "Gaming" and searches for "Headset," the URL updates to <code>/products?category=gaming&search=headset.</code> This allows users to share direct links to specific search results.</p></li>
+    
+    <li><p><strong>Compound Logic:</strong> The filtering function processes category, search query, and price sorting together in one pass for accuracy and performance.</p></li>
+    
+    </ul>
+    <br>
+
+    
+    <h4><strong>C. UX-First Design & Animations</strong></h4>
+    <ul class="list-disc pl-8 space-y-2"  >
+    <li><p><strong>GSAP Animations:</strong> For a premium feel, I integrated GSAP timelines for smooth page and element transitions.</p></li>
+    
+    <li><p><strong>Page Transitions:</strong> A route-wrapper component animates opacity and Y-axis on every route change for a seamless SPA experience.</p></li>
+    
+    <li><p><strong>Interactive Sidebar:</strong> The Cart is implemented as a slide-over panel controlled by global UI state, letting users modify the cart without leaving the current page.</p></li>
+    
+    <li><p><strong>Image Gallery:</strong> A state-driven image gallery on the Product Details page handles image switching and provides fallback handling for broken images.</p></li>
+    </ul>
+    
+    <h4><strong>D. Component Reusability</strong></h4>
+    <ul class="list-disc pl-8 space-y-2">
+    <li><p><strong>DRY Principle:</strong> I ensured minimal repetition by creating reusable components.</p></li>
+    
+    
+      <li><strong>ProductCard.jsx:</strong> Reused in Home (Deals of the Day), Shop Grid, Wishlist, and Related Products sections. Handles badges and dynamic UI states internally.</li>
+      <li><strong>Navbar.jsx:</strong> A responsive navigation bar with mobile hamburger menu, integrated search input, and full routing support.</li>
+    </ul>
+    `
   },
   {
     id: "cyber-social",
@@ -28,7 +102,7 @@ export const PROJECTS = [
     category: "Personal Website",
     desc: "My previous portfolio site. Built to demonstrate mastery of grid layouts and responsive design principles.",
     tech: ["HTML", "SCSS", "JavaScript"],
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
+    image: "",
     challenge: "This was my first attempt at a fully responsive grid system without using any CSS frameworks like Bootstrap or Tailwind.",
     solution: "I relied heavily on CSS Grid and Flexbox. I created a custom SASS mixin library to handle breakpoints, ensuring the typography scaled fluidly from mobile to 4K screens."
   }
