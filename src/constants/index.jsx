@@ -6,9 +6,36 @@ import triangleImg from "../assets/triangle.png"
 // --- PROJECTS ---
 export const PROJECTS = [
   {
+    id: "triangle-conquest",
+     title: "Triangle Conquest (Multiplayer Game)",
+    category: "Multiplayer Strategy Game",
+    link: "https://triangle-conquest.vercel.app/" ,
+    github:"https://github.com/karankumar-ghub/Triangle-Conquest",
+    desc: `<p>
+    <strong>Triangle Conquest</strong> is an interactive, turn-based strategy game where players compete to capture territory by connecting dots on a grid. The goal is to form triangles; each completed triangle grants a point and an extra turn. The game features a "Cyber-SciFi" aesthetic and supports both <strong>Online Multiplayer</strong> (real-time syncing) and <strong>Local Pass & Play</strong>.
+  </p>
+  <p>
+    It demonstrates advanced state management, real-time database integration, and complex canvas rendering logic wrapped in a responsive React application.
+  </p>`,
+    tech: ["Next.js", "Framer Motion", "Prisma", "PostgreSQL"],
+    image: triangleImg,
+    challenge: `<h3><strong>1. Real-time Latency & State Sync</strong></h3>
+    <p>Ensuring both players see the exact same board state without race conditions during rapid turns.</p>
+    <h3><strong>2. Triangle Detection Algorithm</strong></h3>
+      <p> Efficiently checking if a newly drawn line completes one or more triangles in a web of connected nodes.</p>
+      <h3><strong>3. Responsive Canvas Rendering</strong></h3>
+      <p>Keeping the grid dots aligned and clickable across different screen sizes (Mobile vs. Desktop).</p>
+      `,
+    solution: `<p><strong>Solution 1:-</strong> Implemented a centralized Firestore document as the "single source of truth." The client uses optimistic UI updates for immediate feedback but reverts if the server rejects the move.</p>
+    <p><strong>Solution 2:-</strong> Wrote a custom <code>findNewTriangles</code> utility that checks the common neighbors of the two connected points. If a neighbor is already connected to both points, a triangle is formed.</p>
+    <p><strong>Solution 3:-</strong> Created a dynamic coordinate mapping system in <code>useGameLogic</code> that scales the grid based on the parent container's dimensions and handles pixel density (DPR) for sharp rendering on retina displays.</p>`
+  },
+  {
     id: "flipzone", // <--- Unique ID for the URL
     title: "FlipZone — Modern E-Commerce",
     category: "Web Application",
+    link : "https://flipzonekk.vercel.app/",
+    github:"https://github.com/karankumar-ghub/Flipzone",
     desc: `<p>FlipZone is a fully functional, high-fidelity e-commerce web application designed to replicate the complexity of major platforms like Flipkart or Amazon. The goal was not just to build a UI, but to architect a scalable frontend application that handles complex state management, data filtering, and user persistence without a backend.<p/>
     <br>
     <p>The project features a distinct "Next-Gen" aesthetic, moving away from generic bootstrap templates to a custom-designed interface using Tailwind CSS variables. It allows users to browse products, filter by dynamic categories, manage a shopping cart, maintain a wishlist, and simulate a secure checkout process.</p>`,
@@ -88,40 +115,7 @@ export const PROJECTS = [
     </ul>
     `
   },
-  {
-    id: "triangle-conquest",
-     title: "Triangle Conquest (Multiplayer Strategy Game)",
-
-    category: "Multiplayer Strategy Game",
-    desc: `<p>
-    <strong>Triangle Conquest</strong> is an interactive, turn-based strategy game where players compete to capture territory by connecting dots on a grid. The goal is to form triangles; each completed triangle grants a point and an extra turn. The game features a "Cyber-SciFi" aesthetic and supports both <strong>Online Multiplayer</strong> (real-time syncing) and <strong>Local Pass & Play</strong>.
-  </p>
-  <p>
-    It demonstrates advanced state management, real-time database integration, and complex canvas rendering logic wrapped in a responsive React application.
-  </p>`,
-    tech: ["Next.js", "Framer Motion", "Prisma", "PostgreSQL"],
-    image: triangleImg,
-    challenge: `<h3><strong>1. Real-time Latency & State Sync</strong></h3>
-    <p>Ensuring both players see the exact same board state without race conditions during rapid turns.</p>
-    <h3><strong>2. Triangle Detection Algorithm</strong></h3>
-      <p> Efficiently checking if a newly drawn line completes one or more triangles in a web of connected nodes.</p>
-      <h3><strong>3. Responsive Canvas Rendering</strong></h3>
-      <p>Keeping the grid dots aligned and clickable across different screen sizes (Mobile vs. Desktop).</p>
-      `,
-    solution: `<p><strong>Solution 1:-</strong> Implemented a centralized Firestore document as the "single source of truth." The client uses optimistic UI updates for immediate feedback but reverts if the server rejects the move.</p>
-    <p><strong>Solution 2:-</strong> Wrote a custom <code>findNewTriangles</code> utility that checks the common neighbors of the two connected points. If a neighbor is already connected to both points, a triangle is formed.</p>
-    <p><strong>Solution 3:-</strong> Created a dynamic coordinate mapping system in <code>useGameLogic</code> that scales the grid based on the parent container's dimensions and handles pixel density (DPR) for sharp rendering on retina displays.</p>`
-  },
-  {
-    id: "portfolio-v1",
-    title: "Portfolio V1",
-    category: "Personal Website",
-    desc: "My previous portfolio site. Built to demonstrate mastery of grid layouts and responsive design principles.",
-    tech: ["HTML", "SCSS", "JavaScript"],
-    image: "",
-    challenge: "This was my first attempt at a fully responsive grid system without using any CSS frameworks like Bootstrap or Tailwind.",
-    solution: "I relied heavily on CSS Grid and Flexbox. I created a custom SASS mixin library to handle breakpoints, ensuring the typography scaled fluidly from mobile to 4K screens."
-  }
+  
 ];
 
 // --- SERVICES ---

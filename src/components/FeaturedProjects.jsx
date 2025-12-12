@@ -107,7 +107,7 @@ const FeaturedProjects = ({ isDark }) => {
                                             ${activeProject.id === project.id ? 'opacity-100 translate-x-0' : ''}
                                             ${isDark ? 'text-cyan-500' : 'text-cyan-600'}
                                         `}
-                                        size={32}
+                                        size={64}
                                     />
                                 </div>
                             </Link>

@@ -99,7 +99,7 @@ const ProjectDetails = ({ isDark }) => {
     <Reveal delay={0.3}>
       <div className="flex flex-wrap gap-4">
         <a
-          href="https://flipzonekk.vercel.app/"
+          href={project.link}
           target="_blank"
           rel="noreferrer"
           className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold border transition-all interactive
@@ -109,7 +109,7 @@ const ProjectDetails = ({ isDark }) => {
           Live Demo <ExternalLink size={16} />
         </a>
         <a
-          href="https://github.com/karankumar-ghub/Flipzone"
+          href={project.github}
           target="_blank"
           rel="noreferrer"
           className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold border transition-all interactive
