@@ -1,5 +1,7 @@
 import { Monitor, PenTool, Cpu, Globe, Code, Terminal, Github, Layout } from 'lucide-react';
 import checkoutImg from "../assets/checkout.png"
+import triangleImg from "../assets/triangle.png"
+
 
 // --- PROJECTS ---
 export const PROJECTS = [
@@ -87,14 +89,28 @@ export const PROJECTS = [
     `
   },
   {
-    id: "cyber-social",
-    title: "Cyber Social",
-    category: "Social Platform",
-    desc: "A minimal social media web app focusing on clean typography and smooth interaction animations.",
+    id: "triangle-conquest",
+     title: "Triangle Conquest (Multiplayer Strategy Game)",
+
+    category: "Multiplayer Strategy Game",
+    desc: `<p>
+    <strong>Triangle Conquest</strong> is an interactive, turn-based strategy game where players compete to capture territory by connecting dots on a grid. The goal is to form triangles; each completed triangle grants a point and an extra turn. The game features a "Cyber-SciFi" aesthetic and supports both <strong>Online Multiplayer</strong> (real-time syncing) and <strong>Local Pass & Play</strong>.
+  </p>
+  <p>
+    It demonstrates advanced state management, real-time database integration, and complex canvas rendering logic wrapped in a responsive React application.
+  </p>`,
     tech: ["Next.js", "Framer Motion", "Prisma", "PostgreSQL"],
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1600&q=80",
-    challenge: "Building a real-time feed that scales was difficult. I also wanted to implement a 'skeleton loading' state that felt premium, not generic.",
-    solution: "I used Next.js server-side rendering (SSR) for initial load speed and SWR for real-time data fetching. The skeleton screens were custom-designed in Figma to match the exact layout of the final content."
+    image: triangleImg,
+    challenge: `<h3><strong>1. Real-time Latency & State Sync</strong></h3>
+    <p>Ensuring both players see the exact same board state without race conditions during rapid turns.</p>
+    <h3><strong>2. Triangle Detection Algorithm</strong></h3>
+      <p> Efficiently checking if a newly drawn line completes one or more triangles in a web of connected nodes.</p>
+      <h3><strong>3. Responsive Canvas Rendering</strong></h3>
+      <p>Keeping the grid dots aligned and clickable across different screen sizes (Mobile vs. Desktop).</p>
+      `,
+    solution: `<p><strong>Solution 1:-</strong> Implemented a centralized Firestore document as the "single source of truth." The client uses optimistic UI updates for immediate feedback but reverts if the server rejects the move.</p>
+    <p><strong>Solution 2:-</strong> Wrote a custom <code>findNewTriangles</code> utility that checks the common neighbors of the two connected points. If a neighbor is already connected to both points, a triangle is formed.</p>
+    <p><strong>Solution 3:-</strong> Created a dynamic coordinate mapping system in <code>useGameLogic</code> that scales the grid based on the parent container's dimensions and handles pixel density (DPR) for sharp rendering on retina displays.</p>`
   },
   {
     id: "portfolio-v1",
