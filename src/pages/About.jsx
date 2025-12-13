@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import Reveal from '../components/Reveal';
 import { TOOLKIT_ITEMS, SKILLS_STATS, EDUCATION_TIMELINE, CERTIFICATIONS } from '../constants';
 import { Helmet } from 'react-helmet-async';
+import resume from '../assets/KaranResume.pdf';
 
 
 const Toolkit = ({ isDark }) => (
@@ -59,7 +60,7 @@ const About = ({ isDark }) => (
           </Reveal>
           <Reveal delay={0.2}>
       <a 
-        href="src\assets\KaranResume.pdf" 
+        href={resume}
         download="Karan_Kumar_Resume.pdf"
         className={`inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-lg transition-all interactive hover:-translate-y-1 hover:shadow-lg mt-12
           ${isDark 
