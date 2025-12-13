@@ -59,7 +59,7 @@ const About = ({ isDark }) => (
           </Reveal>
           <Reveal delay={0.2}>
       <a 
-        href="/resume.pdf" 
+        href="src\assets\KaranResume.pdf" 
         download="Karan_Kumar_Resume.pdf"
         className={`inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-lg transition-all interactive hover:-translate-y-1 hover:shadow-lg mt-12
           ${isDark 

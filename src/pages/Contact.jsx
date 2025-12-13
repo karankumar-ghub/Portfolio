@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Phone, Github, Linkedin, Instagram, PenTool, Calendar, MessageSquare, Send, Plus, Minus, Loader2 } from 'lucide-react';
+import { Phone, Github, Linkedin, Instagram, PenTool, Calendar, MessageSquare, Send, Plus, Minus, Loader2, Facebook, Target } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import PageTransition from '../components/PageTransition';
 import Footer from '../components/Footer';
@@ -191,9 +191,9 @@ const Contact = ({ isDark }) => {
             {/* (Social links code) */}
              {[
               { icon: <Phone />, label: "Call", href: "tel:+918958073763" },
-              { icon: <Github />, label: "Github", href: "#" },
-              { icon: <Linkedin />, label: "LinkedIn", href: "#" },
-              { icon: <Instagram />, label: "Instagram", href: "#" },
+              { icon: <Github />, label: "Github", href: "https://github.com/karankumar-ghub" },
+              { icon: <Send />, label: "Telegram", href: "https://t.me/KaranDRajput" },
+              { icon: <Instagram />,label: "Instagram", href: "https://www.instagram.com/karan.creats/" },
             ].map((link, i) => (
               <a 
                 key={i} 
